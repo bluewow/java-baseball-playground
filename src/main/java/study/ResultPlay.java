@@ -24,11 +24,11 @@ public class ResultPlay {
         return nothing;
     }
 
-    public boolean isFinish() {
+    public boolean isNotFinish() {
         if(strike == 3)
-            return true;
+            return false;
 
-        return false;
+        return true;
     }
 }
 

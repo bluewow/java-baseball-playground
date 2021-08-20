@@ -26,10 +26,7 @@ public class Display {
         System.out.println(s);
     }
 
-    public static boolean terminatePrint(Supplier<Integer> supplier, boolean isFinish) {
-        if(!isFinish)
-            return false;
-
+    public static boolean terminatePrint(Supplier<Integer> supplier) {
         System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
         System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
         Integer input = supplier.get();

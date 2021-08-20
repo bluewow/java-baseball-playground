@@ -21,7 +21,10 @@ public class BaseballGamePlay {
 
             Display.outputPrint(resultPlay);
 
-            if(Display.terminatePrint(scanner::nextInt, resultPlay.isFinish()))
+            if(resultPlay.isNotFinish())
+                continue;
+
+            if(Display.terminatePrint(scanner::nextInt))
                 break;
         }
         Display.finish();
