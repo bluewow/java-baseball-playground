@@ -1,28 +1,20 @@
 package study;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.*;
-import org.mockito.Mockito;
 import org.mockito.internal.util.reflection.FieldSetter;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.mockito.BDDMockito.given;
 
 public class GamePlayTest {
 
     BaseBall baseBall;
-    ResultPlay resultPlay;
 
     @BeforeEach
     void init() {
-        resultPlay = new ResultPlay();
         baseBall = new BaseBall();
     }
 
@@ -40,9 +32,9 @@ public class GamePlayTest {
                 BaseBall.class.getDeclaredField("randomKey"),
                 Arrays.asList("1", "2", "3"));
 
-        baseBall.checkStrike(Arrays.asList("1","2","3"), resultPlay);
+        int strikeCount = baseBall.checkStrike(Arrays.asList("1","2","3"));
 
-        assertThat(resultPlay.getStrike()).isEqualTo(3);
+        assertThat(strikeCount).isEqualTo(3);
     }
 
     @Test
@@ -51,9 +43,9 @@ public class GamePlayTest {
                 BaseBall.class.getDeclaredField("randomKey"),
                 Arrays.asList("1", "2", "3"));
 
-        baseBall.checkStrike(Arrays.asList("1","2","4"), resultPlay);
+        int strikeCount = baseBall.checkStrike(Arrays.asList("1","2","4"));
 
-        assertThat(resultPlay.getStrike()).isEqualTo(2);
+        assertThat(strikeCount).isEqualTo(2);
     }
 
     @Test
@@ -62,9 +54,9 @@ public class GamePlayTest {
                 BaseBall.class.getDeclaredField("randomKey"),
                 Arrays.asList("1", "2", "3"));
 
-        baseBall.checkStrike(Arrays.asList("5","2","4"), resultPlay);
+        int strikeCount = baseBall.checkStrike(Arrays.asList("5","2","4"));
 
-        assertThat(resultPlay.getStrike()).isEqualTo(1);
+        assertThat(strikeCount).isEqualTo(1);
     }
 
 
@@ -74,9 +66,9 @@ public class GamePlayTest {
                 BaseBall.class.getDeclaredField("randomKey"),
                 Arrays.asList("1", "2", "3"));
 
-        baseBall.checkBall(Arrays.asList("2","3","1"), resultPlay);
+        int ballCount = baseBall.checkBall(Arrays.asList("2","3","1"));
 
-        assertThat(resultPlay.getBall()).isEqualTo(3);
+        assertThat(ballCount).isEqualTo(3);
     }
 
     @Test
@@ -86,10 +78,11 @@ public class GamePlayTest {
                 Arrays.asList("1", "2", "3"));
 
         Game game = new Game(baseBall);
-        game.play(Arrays.asList("4","5","6"), resultPlay);
+        ResultPlay resultPlay = game.play(Arrays.asList("4","5","6"));
 
         assertThat(resultPlay.getBall()).isEqualTo(0);
         assertThat(resultPlay.getStrike()).isEqualTo(0);
         assertThat(resultPlay.isNothing()).isTrue();
     }
+
 }
